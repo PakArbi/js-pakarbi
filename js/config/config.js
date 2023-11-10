@@ -14,6 +14,7 @@ export function getTokenFromAPI() {
         .catch(error => console.error('Gagal mengambil token:', error));
 }
 
+//get data 
 export function GetDataForm() {
     const username = document.querySelector("#username").value;
     const password = document.querySelector("#password").value;
@@ -28,6 +29,7 @@ export function GetDataForm() {
     return data
 }
 
+// post login
 export function PostLogin() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
@@ -41,11 +43,13 @@ export function PostLogin() {
     return data;
 }
 
+// alert post 
 export function AlertPost(value) {
     alert(value.message + "\nRegistrasi Berhasil")
     window.location.href = "login.html"
 }
 
+// response post login
 function ResponsePostLogin(response) {
     if (response && response.token) {
         console.log('Token User:', response.token);
