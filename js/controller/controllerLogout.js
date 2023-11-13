@@ -2,7 +2,7 @@ import {
     deleteCookie
 } from 'https://jscroot.github.io/cookie/croot.js';
 
-function alert() {
+function fungsiAlert() {
     alert("Apakah anda ingin keluar?")
 }
 
