@@ -5,7 +5,7 @@ import {
 
 function logout() {
 
-    alert("Apakah anda ingin keluar?");
+    alert("Apakah anda yakin ingin keluar?");
 
     deleteCookie('user_token');
     window.location.href = '/pages/login.html';
