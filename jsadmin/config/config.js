@@ -56,7 +56,7 @@ function ResponsePostLogin(response) {
     if (response && response.token) {
         console.log('Token User:', response.token);
         setCookieWithExpireHour('user_token', response.token, 2);
-        window.location.href = 'https://pakarbi.github.io/pages/dashboard_admin.html';
+        window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard_admin.html';
         alert("Selamat Datang")
     } else {
         alert('Login gagal. Silakan coba lagi.');
