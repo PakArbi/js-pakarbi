@@ -55,7 +55,7 @@ export function AlertPost(value) {
 function ResponsePostLogin(response) {
     if (response && response.token) {
         console.log('Token User:', response.token);
-        setCookieWithExpireHour('user_token', response.token, 2);
+        setCookieWithExpireHour('Token Login User', response.token, 2);
         window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
         alert("Selamat Datang")
     } else {
