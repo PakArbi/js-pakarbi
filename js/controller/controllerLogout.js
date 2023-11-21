@@ -7,7 +7,7 @@ function logout() {
 
     alert("Apakah anda yakin ingin keluar?");
 
-    deleteCookie('user_token');
+    deleteCookie('Token Login User');
     window.location.href = '/pages/login.html';
 }
 
