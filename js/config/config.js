@@ -31,20 +31,6 @@ export function GetDataForm() {
     return data
 }
 
-export function GetDataForm() {
-    const email = document.querySelector("#email").value;
-    const passwordhash = document.querySelector("#passwordhash").value;
-    const role = document.querySelector("#role").value;
-    console.log(password)
-
-    const data = {
-        email: email,
-        passwordhash: passwordhash,
-        role: role
-    };
-    return data
-}
-
 // post login
 export function PostLogin() {
     const npm = document.getElementById("npm").value;
