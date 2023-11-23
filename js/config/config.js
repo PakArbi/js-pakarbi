@@ -4,7 +4,7 @@ import {
 
 //token api
 export function getTokenFromAPI() {
-    const tokenUrl = "https://asia-southeast2-lofty-mark-401904.cloudfunctions.net/loginpakarbi";
+    const tokenUrl = "https://asia-southeast2-lofty-mark-401904.cloudfunctions.net/loginnewpakarbi";
     fetch(tokenUrl)
         .then(response => response.json())
         .then(tokenData => {
@@ -18,14 +18,14 @@ export function getTokenFromAPI() {
 
 //get data 
 export function GetDataForm() {
-    const username = document.querySelector("#username").value;
-    const password = document.querySelector("#password").value;
+    const npm = document.querySelector("#npm").value;
+    const passwordhash = document.querySelector("#passwordhash").value;
     const role = document.querySelector("#role").value;
     console.log(password)
 
     const data = {
-        username: username,
-        password: password,
+        npm: npm,
+        passwordhash: passwordhash,
         role: role
     };
     return data
@@ -33,13 +33,13 @@ export function GetDataForm() {
 
 // post login
 export function PostLogin() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const npm = document.getElementById("npm").value;
+    const passwordhash = document.getElementById("passwordhash").value;
     const role = document.getElementById("role").value;
 
     const data = {
-        username: username,
-        password: password,
+        npm: npm,
+        passwordhash: passwordhash,
         role: role
     };
     return data;
