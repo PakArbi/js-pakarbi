@@ -18,14 +18,19 @@ export function getTokenFromAPI() {
 
 //get data 
 export function GetDataForm() {
+    const username = document.querySelector("#username").value;
     const npm = document.querySelector("#npm").value;
+    const password = document.querySelector("#password").value;
     const passwordhash = document.querySelector("#passwordhash").value;
+    const email = document.querySelector("#email").value;
     const role = document.querySelector("#role").value;
-    console.log(passwordhash)
 
     const data = {
+        username: username,
         npm: npm,
+        password: password,
         passwordhash: passwordhash,
+        email: email,
         role: role
     };
     return data
