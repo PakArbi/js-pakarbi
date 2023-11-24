@@ -21,7 +21,7 @@ export function GetDataForm() {
     const email = document.querySelector("#email").value;
     const passwordhash = document.querySelector("#passwordhash").value;
     const role = document.querySelector("#role").value;
-    console.log(password)
+    console.log(passwordhash)
 
     const data = {
         email: email,
