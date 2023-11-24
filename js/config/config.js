@@ -41,11 +41,11 @@ export function PostLogin() {
     const role = document.getElementById("role").value;
 
     const data = {
-        username: username,
+        // username: username,
         npm: npm,
-        password: password,
+        // password: password,
         passwordhash: passwordhash,
-        email: email,
+        // email: email,
         role: role
     };
     return data;
