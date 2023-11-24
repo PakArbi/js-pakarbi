@@ -1,5 +1,5 @@
 import {postWithToken} from "https://jscroot.github.io/api/croot.js";
-import {GetDataForm, PostLogin,ResponseLogin} from "../config/config.js";
+import {PostLogin,ResponseLogin} from "../config/config.js";
 import {URLLogin} from "../template/template.js";
 import {token} from '../template/template.js';
 
