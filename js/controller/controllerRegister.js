@@ -1,5 +1,5 @@
 import {postWithBearer} from "https://jscroot.github.io/api/croot.js";
-import {GetDataForm,ResponsePost} from "../config/config.js";
+import {GetDataForm,PostLogin,ResponsePost} from "../config/config.js";
 import {token,URLPost} from "../template/template.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
-        let data = GetDataForm();
+        let data = PostLogin();
         postWithBearer(URLPost, token, data, ResponsePost)
     });
 });
