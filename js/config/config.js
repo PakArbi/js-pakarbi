@@ -33,19 +33,13 @@ export function GetDataForm() {
 
 // post login
 export function PostLogin() {
-    // const username = document.getElementById("username").value;
     const npm = document.getElementById("npm").value;
-    // const password = document.getElementById("password").value;
     const passwordhash = document.getElementById("passwordhash").value;
-    // const email = document.getElementById("email").value;
     const role = document.getElementById("role").value;
 
     const data = {
-        // username: username,
         npm: npm,
-        // password: password,
         passwordhash: passwordhash,
-        // email: email,
         role: role
     };
     return data;
