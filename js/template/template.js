@@ -1,6 +1,7 @@
 // template js
 
 //url register
+
 export let URLPost = `https://asia-southeast2-lofty-mark-401904.cloudfunctions.net/registernewpakarbi`
 
 //url login 
