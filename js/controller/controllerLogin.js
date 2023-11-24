@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("formlogin");
     form.addEventListener("submit", function (event) {
         event.preventDefault();
-        let data = GetDataForm();
+        let data = PostLogin();
         postWithToken(URLLogin, 'Authorization', 'Bearer ' + token, data, ResponseLogin);
     });
 });
