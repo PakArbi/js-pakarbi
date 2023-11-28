@@ -1,12 +1,12 @@
 // template js
 
 //url register
-export let URLPost = `https://asia-southeast2-lofty-mark-401904.cloudfunctions.net/registernewpakarbi`
+export let URLPost = `https://us-central1-pakarbi.cloudfunctions.net/registerpakarbi`
 
 //url login 
-export let URLLogin = `https://asia-southeast2-lofty-mark-401904.cloudfunctions.net/loginnewpakarbi`
+export let URLLogin = `https://asia-southeast2-pakarbi.cloudfunctions.net/loginpakarbi`
 
 //url login 
-export let URLLoginEmail = `https://asia-southeast2-lofty-mark-401904.cloudfunctions.net/loginnewpakarbiemail`
+export let URLLoginEmail = `https://asia-southeast2-pakarbi.cloudfunctions.net/loginpakarbiemail`
 
 export let token = 'token';
