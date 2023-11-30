@@ -1,3 +1,18 @@
+// Include your getTokenFromCookies function here
+
+const getTokenFromCookies = (cookieName) => {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === cookieName) {
+            return value;
+        }
+    }
+    return null;
+};
+
+// Your other functions remain the same
+
 const insertParkiran = async (event) => {
     event.preventDefault();
 
@@ -31,26 +46,18 @@ const insertParkiran = async (event) => {
 
     try {
         const response = await fetch(targetURL, requestOptions);
+        const data = await response.json();
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const contentType = response.headers.get('content-type');
-
-        if (contentType && contentType.includes('application/json')) {
-            const data = await response.json();
-
-            if (data.status === false) {
-                alert(data.message);
-            } else {
-                alert("Parkiran data inserted successfully!");
-                // Optionally, you can reset the form or perform other actions.
-            }
+        if (data.status === false) {
+            alert(data.message);
         } else {
-            throw new Error('Response is not in JSON format');
+            alert("Parkiran data inserted successfully!");
+            // Optionally, you can reset the form or perform other actions.
         }
     } catch (error) {
         console.error('Error:', error);
     }
 };
+
+// Attach the insertEmployee function to the form's submit event
+document.getElementById('formparkiran').addEventListener('submit', insertParkiran);
