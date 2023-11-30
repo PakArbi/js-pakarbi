@@ -23,7 +23,7 @@ const insertParkiran = async (event) => {
         return;
     }
 
-    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/postparkiran';
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/insertParkiran';
 
     const myHeaders = new Headers();
     myHeaders.append('Login', token);
