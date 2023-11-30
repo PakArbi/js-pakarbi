@@ -39,18 +39,18 @@ export function GetDataForm() {
 }
 
 // post login
-// export function PostLogin() {
-//     const npm = document.getElementById("npm").value;
-//     const passwordhash = document.getElementById("passwordhash").value;
-//     const role = document.getElementById("role").value;
+export function PostLogin() {
+    const npm = document.getElementById("npm").value;
+    const passwordhash = document.getElementById("passwordhash").value;
+    const role = document.getElementById("role").value;
 
-//     const data = {
-//         npm: npm,
-//         passwordhash: passwordhash,
-//         role: role
-//     };
-//     return data;
-// }
+    const data = {
+        npm: npm,
+        passwordhash: passwordhash,
+        role: role
+    };
+    return data;
+}
 
 // alert post 
 export function AlertPost(value) {
@@ -59,21 +59,22 @@ export function AlertPost(value) {
 }
 
 // response post login
-// function ResponsePostLogin(response) {
-//     if (response && response.token) {
-//         console.log('Token User:', response.token);
-//         setCookieWithExpireHour('Token Login User', response.token, 2);
-//         window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
-//         alert("Selamat Datang")
-//     } else {
-//         alert('Login gagal. Silakan coba lagi.');
-//     }
-// }
+function ResponsePostLogin(response) {
+    if (response && response.token) {
+        console.log('Token User:', response.token);
+        setCookieWithExpireHour('Token Login User', response.token, 2);
+        window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
+        alert("Selamat Datang")
+    } else {
+        alert('Login gagal. Silakan coba lagi.');
+    }
+}
 
 
 export function ResponsePost(result) {
     AlertPost(result);
 }
-// export function ResponseLogin(result) {
-//     ResponsePostLogin(result)
-// }
+
+export function ResponseLogin(result) {
+    ResponsePostLogin(result)
+}
