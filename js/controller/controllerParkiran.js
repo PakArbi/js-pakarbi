@@ -1,3 +1,17 @@
+// Include your getTokenFromCookies function here
+const getTokenFromCookies = (cookieName) => {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === cookieName) {
+            return value;
+        }
+    }
+    return null;
+};
+
+// Your other functions remain the same
+
 const insertParkiran = async (event) => {
     event.preventDefault();
 
@@ -5,13 +19,6 @@ const insertParkiran = async (event) => {
 
     if (!token) {
         alert("Header Login Not Found");
-        return;
-    }
-
-    // Validate if parkiranid is a valid integer
-    const parkiranidValue = document.getElementById('parkiranid').value;
-    if (!Number.isInteger(Number(parkiranidValue))) {
-        alert("Parkiran ID must be a valid integer");
         return;
     }
 
@@ -25,7 +32,7 @@ const insertParkiran = async (event) => {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify({
-            parkiranid: Number(parkiranidValue), // Convert to integer
+            parkiranid: document.getElementById('parkiranid').value,
             nama: document.getElementById('nama').value,
             npm: document.getElementById('npm').value,
             jurusan: document.getElementById('jurusan').value,
