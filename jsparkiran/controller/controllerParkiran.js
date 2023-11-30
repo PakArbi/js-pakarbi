@@ -16,7 +16,7 @@ const getTokenFromCookies = (cookieName) => {
 const insertParkiran = async (event) => {
     event.preventDefault();
 
-    const token = getTokenFromCookies('Token Login User');
+    const token = getTokenFromCookies('Login');
 
     if (!token) {
         alert("Header Login Not Found");
@@ -26,7 +26,7 @@ const insertParkiran = async (event) => {
     const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/postparkiran';
 
     const myHeaders = new Headers();
-    myHeaders.append('Token Login User', token);
+    myHeaders.append('Login', token);
     myHeaders.append('Content-Type', 'application/json');
 
     const requestOptions = {
