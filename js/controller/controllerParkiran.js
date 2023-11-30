@@ -19,14 +19,14 @@ const insertParkiran = async (event) => {
     const token = getTokenFromCookies('Login');
 
     if (!token) {
-        alert("Token Not Found");
+        alert("Header Login Not Found");
         return;
     }
 
     const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/postparkiran';
 
     const myHeaders = new Headers();
-    myHeaders.append('Authorization', `Bearer ${token}`);
+    myHeaders.append('Login', token);
     myHeaders.append('Content-Type', 'application/json');
 
     const requestOptions = {
@@ -46,11 +46,6 @@ const insertParkiran = async (event) => {
 
     try {
         const response = await fetch(targetURL, requestOptions);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
         const data = await response.json();
 
         if (data.status === false) {
@@ -60,7 +55,7 @@ const insertParkiran = async (event) => {
             // Optionally, you can reset the form or perform other actions.
         }
     } catch (error) {
-        console.error('Error during fetch:', error);
+        console.error('Error:', error);
     }
 };
 
