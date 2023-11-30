@@ -22,6 +22,12 @@ const insertParkiran = async (event) => {
         return;
     }
 
+    const parkiranidValue = document.getElementById('parkiranid').value;
+    if (!Number.isInteger(Number(parkiranidValue))) {
+        alert("Parkiran ID must be a valid integer");
+        return;
+    }
+
     const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/insertParkiran';
 
     const myHeaders = new Headers();
