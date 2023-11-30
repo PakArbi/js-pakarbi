@@ -46,13 +46,24 @@ const insertParkiran = async (event) => {
 
     try {
         const response = await fetch(targetURL, requestOptions);
-        const data = await response.json();
 
-        if (data.status === false) {
-            alert(data.message);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const contentType = response.headers.get('content-type');
+
+        if (contentType && contentType.includes('application/json')) {
+            const data = await response.json();
+
+            if (data.status === false) {
+                alert(data.message);
+            } else {
+                alert("Parkiran data inserted successfully!");
+                // Optionally, you can reset the form or perform other actions.
+            }
         } else {
-            alert("Parkiran data inserted successfully!");
-            // Optionally, you can reset the form or perform other actions.
+            throw new Error('Response is not in JSON format');
         }
     } catch (error) {
         console.error('Error:', error);
