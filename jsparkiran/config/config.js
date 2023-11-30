@@ -71,9 +71,9 @@ export function GetDataForm() {
 // }
 
 
-// export function ResponsePost(result) {
-//     AlertPost(result);
-// }
+export function ResponsePost(result) {
+    AlertPost(result);
+}
 // export function ResponseLogin(result) {
 //     ResponsePostLogin(result)
 // }
