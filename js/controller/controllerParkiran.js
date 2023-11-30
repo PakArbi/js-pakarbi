@@ -1,17 +1,3 @@
-// Include your getTokenFromCookies function here
-const getTokenFromCookies = (cookieName) => {
-    const cookies = document.cookie.split(';');
-    for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split('=');
-        if (name === cookieName) {
-            return value;
-        }
-    }
-    return null;
-};
-
-// Your other functions remain the same
-
 const insertParkiran = async (event) => {
     event.preventDefault();
 
@@ -23,7 +9,11 @@ const insertParkiran = async (event) => {
     }
 
     const parkiranidValue = document.getElementById('parkiranid').value;
-    if (!Number.isInteger(Number(parkiranidValue))) {
+
+    // Ubah parkiranidValue menjadi angka (number)
+    const parkiranid = Number(parkiranidValue);
+
+    if (!Number.isInteger(parkiranid)) {
         alert("Parkiran ID must be a valid integer");
         return;
     }
@@ -38,7 +28,7 @@ const insertParkiran = async (event) => {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify({
-            parkiranid: document.getElementById('parkiranid').value,
+            parkiranid: parkiranid, // Menggunakan variabel yang sudah diubah
             nama: document.getElementById('nama').value,
             npm: document.getElementById('npm').value,
             jurusan: document.getElementById('jurusan').value,
@@ -74,6 +64,3 @@ const insertParkiran = async (event) => {
         console.error('Error:', error);
     }
 };
-
-// Attach the insertEmployee function to the form's submit event
-document.getElementById('formparkiran').addEventListener('submit', insertParkiran);
