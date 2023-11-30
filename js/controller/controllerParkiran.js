@@ -51,7 +51,7 @@ const insertParkiran = async (event) => {
         if (data.status === false) {
             alert(data.message);
         } else {
-            alert("Employee data inserted successfully!");
+            alert("Parkiran data inserted successfully!");
             // Optionally, you can reset the form or perform other actions.
         }
     } catch (error) {
