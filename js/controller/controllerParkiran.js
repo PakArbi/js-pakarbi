@@ -8,16 +8,6 @@ const insertParkiran = async (event) => {
         return;
     }
 
-    const parkiranidValue = document.getElementById('parkiranid').value;
-
-    // Ubah parkiranidValue menjadi angka (number)
-    const parkiranid = Number(parkiranidValue);
-
-    if (!Number.isInteger(parkiranid)) {
-        alert("Parkiran ID must be a valid integer");
-        return;
-    }
-
     const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/insertParkiran';
 
     const myHeaders = new Headers();
@@ -28,7 +18,7 @@ const insertParkiran = async (event) => {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify({
-            parkiranid: parkiranid, // Menggunakan variabel yang sudah diubah
+            parkiranid: document.getElementById('parkiranid').value,
             nama: document.getElementById('nama').value,
             npm: document.getElementById('npm').value,
             jurusan: document.getElementById('jurusan').value,
