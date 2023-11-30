@@ -4,7 +4,7 @@ import {
 
 //token api
 export function getTokenFromAPI() {
-    const tokenUrl = "https://asia-southeast2-pakarbi.cloudfunctions.net/loginpakarbi";
+    const tokenUrl = "https://asia-southeast2-pakarbi.cloudfunctions.net/postparkiran";
     fetch(tokenUrl)
         .then(response => response.json())
         .then(tokenData => {
@@ -18,60 +18,62 @@ export function getTokenFromAPI() {
 
 //get data 
 export function GetDataForm() {
-    const username = document.querySelector("#username").value;
+    const parkiranid = document.querySelector("#parkiranid").value;
+    const nama = document.querySelector("#nama").value;
     const npm = document.querySelector("#npm").value;
-    const password = document.querySelector("#password").value;
-    const passwordhash = document.querySelector("#passwordhash").value;
-    const email = document.querySelector("#email").value;
-    const role = document.querySelector("#role").value;
+    const jurusan = document.querySelector("#jurusan").value;
+    const namakendaraan = document.querySelector("#namakendaraan").value;
+    const nomorkendaraan = document.querySelector("#nomorkendaraan").value;
+    const jeniskendaraan = document.querySelector("#jeniskendaraan").value;
 
     const data = {
-        username: username,
+        parkiranid: parkiranid,
+        nama: nama,
         npm: npm,
-        password: password,
-        passwordhash: passwordhash,
-        email: email,
-        role: role
+        jurusan: jurusan,
+        namakendaraan: namakendaraan,
+        nomorkendaraan: nomorkendaraan,
+        jeniskendaraan: jeniskendaraan
     };
     return data
 }
 
 // post login
-export function PostLogin() {
-    const npm = document.getElementById("npm").value;
-    const passwordhash = document.getElementById("passwordhash").value;
-    const role = document.getElementById("role").value;
+// export function PostLogin() {
+//     const npm = document.getElementById("npm").value;
+//     const passwordhash = document.getElementById("passwordhash").value;
+//     const role = document.getElementById("role").value;
 
-    const data = {
-        npm: npm,
-        passwordhash: passwordhash,
-        role: role
-    };
-    return data;
-}
+//     const data = {
+//         npm: npm,
+//         passwordhash: passwordhash,
+//         role: role
+//     };
+//     return data;
+// }
 
 // alert post 
-export function AlertPost(value) {
-    alert(value.message + "\nRegistrasi Berhasil")
-    window.location.href = "login.html"
-}
+// export function AlertPost(value) {
+//     alert(value.message + "\nRegistrasi Berhasil")
+//     window.location.href = "login.html"
+// }
 
 // response post login
-function ResponsePostLogin(response) {
-    if (response && response.token) {
-        console.log('Token User:', response.token);
-        setCookieWithExpireHour('Token Login User', response.token, 2);
-        window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
-        alert("Selamat Datang")
-    } else {
-        alert('Login gagal. Silakan coba lagi.');
-    }
-}
+// function ResponsePostLogin(response) {
+//     if (response && response.token) {
+//         console.log('Token User:', response.token);
+//         setCookieWithExpireHour('Token Login User', response.token, 2);
+//         window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
+//         alert("Selamat Datang")
+//     } else {
+//         alert('Login gagal. Silakan coba lagi.');
+//     }
+// }
 
 
-export function ResponsePost(result) {
-    AlertPost(result);
-}
-export function ResponseLogin(result) {
-    ResponsePostLogin(result)
-}
+// export function ResponsePost(result) {
+//     AlertPost(result);
+// }
+// export function ResponseLogin(result) {
+//     ResponsePostLogin(result)
+// }
