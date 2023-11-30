@@ -53,10 +53,10 @@ export function GetDataForm() {
 // }
 
 // alert post 
-// export function AlertPost(value) {
-//     alert(value.message + "\nRegistrasi Berhasil")
-//     window.location.href = "login.html"
-// }
+export function AlertPost(value) {
+    alert(value.message + "\nRegistrasi Berhasil")
+    window.location.href = "login.html"
+}
 
 // response post login
 // function ResponsePostLogin(response) {
