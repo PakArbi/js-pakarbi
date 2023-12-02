@@ -59,12 +59,19 @@ export function AlertPost(value) {
 // response post login
 function ResponsePostLogin(response) {
     if (response && response.token) {
-        // console.log('Token User:', response.token);
         setCookieWithExpireHour('Login', response.token, 2);
         window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
-        alert("Selamat Datang")
+        Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: 'You have successfully logged in!',
+        });
     } else {
-        alert('Login gagal. Silakan coba lagi.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: 'Invalid email or password. Please try again.',
+        });
     }
 }
 
