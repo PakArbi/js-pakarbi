@@ -52,7 +52,11 @@ export function PostLogin() {
 
 // alert post 
 export function AlertPost(value) {
-    alert(value.message + "\nRegistrasi Berhasil")
+    Swal.fire({
+        icon: 'success',
+        title: 'Daftar Berhasil',
+        text: 'Anda telah berhasil daftar!',
+    });
     window.location.href = "login.html"
 }
 
@@ -63,14 +67,14 @@ function ResponsePostLogin(response) {
         window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
         Swal.fire({
             icon: 'success',
-            title: 'Login Successful',
-            text: 'You have successfully logged in!',
+            title: 'Masuk Berhasil',
+            text: 'Anda telah berhasil masuk!',
         });
     } else {
         Swal.fire({
             icon: 'error',
-            title: 'Login Failed',
-            text: 'Invalid email or password. Please try again.',
+            title: 'Gagal Masuk',
+            text: 'NPM atau Kata Sandi tidak valid. Silakan coba lagi.',
         });
     }
 }

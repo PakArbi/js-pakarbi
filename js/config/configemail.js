@@ -47,19 +47,30 @@ export function PostLogin() {
 
 // alert post 
 export function AlertPost(value) {
-    alert(value.message + "\nRegistrasi Berhasil")
+    Swal.fire({
+        icon: 'success',
+        title: 'Daftar Berhasil',
+        text: 'Anda telah berhasil daftar!',
+    });
     window.location.href = "login.html"
 }
 
 // response post login
 function ResponsePostLogin(response) {
     if (response && response.token) {
-        // console.log('Token User:', response.token);
         setCookieWithExpireHour('Login', response.token, 2);
         window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
-        alert("Selamat Datang")
+        Swal.fire({
+            icon: 'success',
+            title: 'Masuk Berhasil',
+            text: 'Anda telah berhasil masuk!',
+        });
     } else {
-        alert('Login gagal. Silakan coba lagi.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal Masuk',
+            text: 'Email atau Kata Sandi tidak valid. Silakan coba lagi.',
+        });
     }
 }
 
