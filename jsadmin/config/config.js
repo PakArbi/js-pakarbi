@@ -4,7 +4,7 @@ import {
 
 //token api
 export function getTokenFromAPI() {
-    const tokenUrl = "https://asia-southeast2-lofty-mark-401904.cloudfunctions.net/loginadminpakarbi";
+    const tokenUrl = "https://asia-southeast2-pakarbi.cloudfunctions.net/loginadmin";
     fetch(tokenUrl)
         .then(response => response.json())
         .then(tokenData => {
@@ -33,13 +33,13 @@ export function GetDataForm() {
 
 // post login
 export function PostLogin() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+    const passwordhash = document.getElementById("passwordhash").value;
     const role = document.getElementById("role").value;
 
     const data = {
-        username: username,
-        password: password,
+        email: email,
+        passwordhash: passwordhash,
         role: role
     };
     return data;
@@ -54,10 +54,9 @@ export function AlertPost(value) {
 // response post login
 function ResponsePostLogin(response) {
     if (response && response.token) {
-        console.log('Token User:', response.token);
-        setCookieWithExpireHour('Token Login Admin', response.token, 2);
+        setCookieWithExpireHour('Login', response.token, 2);
         window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard_admin.html';
-        alert("Selamat Datang")
+        alert("Selamat Datang Admin")
     } else {
         alert('Login gagal. Silakan coba lagi.');
     }
