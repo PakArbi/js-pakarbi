@@ -7,7 +7,7 @@ async function getUserWithToken() {
         return;
     }
 
-    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/getuser';
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/getalluser';
 
     // Set up headers with the token
     const myHeaders = new Headers();
