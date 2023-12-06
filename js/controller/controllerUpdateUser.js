@@ -120,4 +120,4 @@ const updateUser = async (event) => {
     }
 }
 
-document.getElementById('updateForm').addEventListener('submit', updateCatalog)
+document.getElementById('updateForm').addEventListener('submit', updateUser)
