@@ -23,7 +23,7 @@ const insertParkiran = async (event) => {
         return;
     }
 
-    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/insertParkiran';
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/insertparkirannpm';
 
     const myHeaders = new Headers();
     myHeaders.append('token', token);
@@ -40,6 +40,7 @@ const insertParkiran = async (event) => {
             namakendaraan: document.getElementById('namakendaraan').value,
             nomorkendaraan: document.getElementById('nomorkendaraan').value,
             jeniskendaraan: document.getElementById('jeniskendaraan').value,
+            status: document.getElementById('newStatus').value === 'active' ? true : false,
         }),
         redirect: 'follow',
     };
