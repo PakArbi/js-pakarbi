@@ -16,7 +16,7 @@ const getTokenFromCookies = (cookieName) => {
 const insertParkiran = async (event) => {
     event.preventDefault();
 
-    const token = getTokenFromCookies('token');
+    const token = getTokenFromCookies('Login');
 
     if (!token) {
         alert("Header Login Not Found");
@@ -36,7 +36,7 @@ const insertParkiran = async (event) => {
             parkiranid: document.getElementById('parkiranid').value,
             nama: document.getElementById('nama').value,
             npm: document.getElementById('npm').value,
-            jurusan: document.getElementById('jurusan').value,
+            prodi: document.getElementById('prodi').value,
             namakendaraan: document.getElementById('namakendaraan').value,
             nomorkendaraan: document.getElementById('nomorkendaraan').value,
             jeniskendaraan: document.getElementById('jeniskendaraan').value,
