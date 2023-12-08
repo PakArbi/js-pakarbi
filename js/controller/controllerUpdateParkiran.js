@@ -90,6 +90,8 @@ const updateParkiran = async (event) => {
     myHeaders.append('Login', token)
     myHeaders.append('Content-Type', 'application/json')
 
+    const statusValue = document.getElementById('StatusInput').value === 'active'
+
     const requestOptions = {
         method: 'PUT',
         headers: myHeaders,
