@@ -58,6 +58,7 @@ function displayUserData(userData) {
                 <td>${user.npm}</td>
                 <td>${user.password}</td>
                 <td>${user.passwordhash}</td>
+                <td>${user.email}</td>
                 <td>${user.role}</td>
             `;
             userDataBody.appendChild(newRow);

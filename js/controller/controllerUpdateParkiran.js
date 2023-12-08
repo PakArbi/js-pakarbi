@@ -62,13 +62,13 @@ const populateUpdateForm = (parkiranData) => {
         document.getElementById(id).value = value
     }
 
-    setValue('parkiranidinput', parkiranData.usernameid)
-    setValue('namainput', parkiranData.username)
+    setValue('parkiranidinput', parkiranData.parkiranid)
+    setValue('namainput', parkiranData.nama)
     setValue('npminput', parkiranData.npm)
-    setValue('prodiinput', parkiranData.password)
-    setValue('namakendaraaninput', parkiranData.passworhash)
-    setValue('nomorkendaraaninput', parkiranData.email)
-    setValue('jeniskendaraaninput', parkiranData.role)
+    setValue('prodiinput', parkiranData.prodi)
+    setValue('namakendaraaninput', parkiranData.namakendaraan)
+    setValue('nomorkendaraaninput', parkiranData.nomorkendaraan)
+    setValue('jeniskendaraaninput', parkiranData.jeniskendaraan)
     setValue('StatusInput', parkiranData.status)
 
     document.getElementById('updateparkiran').style.display = 'block'
@@ -94,13 +94,13 @@ const updateParkiran = async (event) => {
         method: 'PUT',
         headers: myHeaders,
         body: JSON.stringify({
-            parkiranid: document.getElementById('newparkiranid').value,
-            nama: document.getElementById('newnama').value,
-            npm: document.getElementById('newnama').value,
-            prodi: document.getElementById('newprodi').value,
-            namakendaraan: document.getElementById('newnamakendaraan').value,
-            nomorkendaraan: document.getElementById('newnomorkendaraan').value,
-            jeniskendaraan: document.getElementById('newjeniskendaraan').value,
+            parkiranid: document.getElementById('parkiranidinput').value,
+            nama: document.getElementById('namainput').value,
+            npm: document.getElementById('npminput').value,
+            prodi: document.getElementById('prodiinput').value,
+            namakendaraan: document.getElementById('namakendaraaninput').value,
+            nomorkendaraan: document.getElementById('nomorkendaraaninput').value,
+            jeniskendaraan: document.getElementById('jeniskendaraaninput').value,
             status: statusValue,
         }),
         redirect: 'follow',
