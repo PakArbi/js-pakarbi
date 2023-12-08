@@ -134,16 +134,16 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
         parkiranData.forEach((item) => {
             const newRow = document.createElement('tr')
             newRow.innerHTML = `
-            <td>${parkiran.parkiranid}</td>
-            <td>${parkiran.nama}</td>
-            <td>${parkiran.npm}</td>
-            <td>${parkiran.prodi}</td>
-            <td>${parkiran.namakendaraan}</td>
-            <td>${parkiran.nomorkendaraan}</td>
-            <td>${parkiran.jeniskendaraan}</td>
-            <td>${parkiran.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
+            <td>${item.parkiranid}</td>
+            <td>${item.nama}</td>
+            <td>${item.npm}</td>
+            <td>${item.prodi}</td>
+            <td>${item.namakendaraan}</td>
+            <td>${item.nomorkendaraan}</td>
+            <td>${item.jeniskendaraan}</td>
+            <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
             <td>
-                <a href="#" class="delete-link" data-nomorid="${parkiran.parkiranid}">Delete</a>
+                <a href="#" class="delete-link" data-nomorid="${item.parkiranid}">Delete</a>
             </td>
         `
 
