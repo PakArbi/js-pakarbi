@@ -33,6 +33,70 @@ async function getUserWithToken() {
     }
 }
 
+const deleteParkiran = async (ParkiranId) => {
+    const token = getTokenFromCookies('Login')
+
+    if (!token) {
+        showAlert('Header Login Not Found', 'error')
+        return
+    }
+
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/deleteparkirannpm'
+
+    const myHeaders = new Headers()
+    myHeaders.append('Login', token)
+    myHeaders.append('Content-Type', 'application/json')
+
+    const requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        body: JSON.stringify({
+            parkiranid: ParkiranId
+        }),
+        redirect: 'follow',
+    }
+
+    try {
+        const response = await fetch(targetURL, requestOptions)
+        const data = await response.json()
+
+        if (data.status === 200) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'parkiran deleted successfully!',
+            }).then(() => {
+                getAllEmployees()
+            })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+            })
+        }
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}
+
+// Function to handle the delete confirmation
+const deleteParkiranHandler = (ParkiranId) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteParkiran(ParkiranId)
+        }
+    })
+}
+
 // Function to extract the token from cookies
 function getTokenFromCookies(cookieName) {
     const cookies = document.cookie.split(';');
@@ -61,6 +125,9 @@ function displayUserData(parkiranData) {
                 <td>${parkiran.nomorkendaraan}</td>
                 <td>${parkiran.jeniskendaraan}</td>
                 <td>${parkiran.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
+                <td>
+                    <a href="#" class="delete-link" data-nomorid="${parkiran.parkiranid}">Delete</a>
+                </td>
             `;
             parkiranDataBody.appendChild(newRow);
         });
