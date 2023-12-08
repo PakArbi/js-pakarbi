@@ -16,11 +16,11 @@ const showUpdateAlert = (message, icon = 'success') => {
         showConfirmButton: false,
         timer: 100000,
     }).then(() => {
-        window.location.href = 'editprofilparkiran.html'
+        window.location.href = 'seeprofilparkiran.html'
     })
 }
 
-const searchnomorById = async (nomorId) => {
+const searchnomorById = async (ParkiranId) => {
     const token = getTokenFromCookies('Login')
 
     if (!token) {
@@ -37,7 +37,7 @@ const searchnomorById = async (nomorId) => {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify({
-            usernameid: usernameid
+            parkiranid: ParkiranId
         }),
         redirect: 'follow',
     }
@@ -69,7 +69,7 @@ const populateUpdateForm = (parkiranData) => {
     setValue('namakendaraaninput', parkiranData.namakendaraan)
     setValue('nomorkendaraaninput', parkiranData.nomorkendaraan)
     setValue('jeniskendaraaninput', parkiranData.jeniskendaraan)
-    setValue('StatusInput', parkiranData.status)
+    setValue('Statusinput', parkiranData.status)
 
     document.getElementById('updateparkiran').style.display = 'block'
 }
@@ -90,7 +90,7 @@ const updateParkiran = async (event) => {
     myHeaders.append('Login', token)
     myHeaders.append('Content-Type', 'application/json')
 
-    const statusValue = document.getElementById('StatusInput').value === 'active'
+    const statusValue = document.getElementById('Statusinput').value === 'active'
 
     const requestOptions = {
         method: 'PUT',
@@ -113,8 +113,8 @@ const updateParkiran = async (event) => {
         const data = await response.json()
 
         if (response.ok) {
-            showUpdateAlert('Berhasil Update Data User', 'success')
-            window.location.href = 'editprofilparkiran.html'
+            showUpdateAlert('Berhasil Update Data', 'success')
+            window.location.href = 'seeprofilparkiran.html'
         } else {
             showUpdateAlert(data.message || 'Error updating data', 'error')
         }
