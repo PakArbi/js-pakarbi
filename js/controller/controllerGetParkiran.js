@@ -118,12 +118,14 @@ const deleteParkiranHandler = (ParkiranId) => {
 
 // Event listener to handle clicks on the table
 document.getElementById('parkiranDataBody').addEventListener('click', (event) => {
-    const target = event.target
+    const target = event.target;
+    const ParkiranId = target.getAttribute('data-parkiranid');
+
     if (target.classList.contains('delete-link')) {
-        const ParkiranId = target.getAttribute('data-nomorid')
-        deleteParkiranHandler(ParkiranId)
+        deleteParkiranHandler(ParkiranId);
     }
-})
+});
+
 
 const displayParkiranData = (parkiranData, tableBodyId) => {
     const parkirdatabody = document.getElementById(tableBodyId)
@@ -143,7 +145,7 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
             <td>${item.jeniskendaraan}</td>
             <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
             <td>
-                <a href="#" class="delete-link" data-nomorid="${item.parkiranid}">Delete</a>
+                <a href="#" class="delete-link" data-parkiranid="${item.parkiranid}">Delete</a>
             </td>
         `
 
