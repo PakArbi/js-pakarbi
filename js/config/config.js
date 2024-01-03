@@ -4,7 +4,7 @@ import {
 
 //token api
 export function getTokenFromAPI() {
-    const tokenUrl = "https://asia-southeast2-project3-403614.cloudfunctions.net/login";
+    const tokenUrl = "https://asia-southeast2-pakarbi.cloudfunctions.net/loginpakarbinpm";
     fetch(tokenUrl)
         .then(response => response.json())
         .then(tokenData => {
