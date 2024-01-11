@@ -52,6 +52,48 @@ const getAllParkiran = async () => {
     }
 }
 
+//Get Data by Id
+const getParkiranById = async (ParkiranId) => {
+    const token = getTokenFromCookies('Login')
+
+    if (!token) {
+        showAlert('Header Login Not Found', 'error')
+        return
+    }
+
+    const targetURL = `https://asia-southeast2-pakarbi.cloudfunctions.net/getFetchParkiran/${ParkiranId}`
+
+    const myHeaders = new Headers()
+    myHeaders.append('Login', token)
+    myHeaders.append('Content-Type', 'application/json')
+
+    const requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+    }
+
+    try {
+        const response = await fetch(targetURL, requestOptions)
+        const data = await response.json()
+
+        if (data.status === 200) {
+            // Do something with the retrieved parkiran data
+            console.log('Parkiran Details:', data.parkiran)
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+            })
+        }
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}
+
+
+
 const deleteParkiran = async (ParkiranId) => {
     const token = getTokenFromCookies('Login')
 
