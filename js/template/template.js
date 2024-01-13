@@ -1,7 +1,7 @@
 // template js
 
 //url register
-export let URLPost = `https://asia-southeast2-pakarbi.cloudfunctions.net/register`
+export let URLPost = `https://asia-southeast2-pakarbi.cloudfunctions.net/registerpakarbi`
 
 //url login 
 export let URLLogin = `https://asia-southeast2-pakarbi.cloudfunctions.net/loginpakarbinpm`
