@@ -124,4 +124,10 @@ const updateParkiran = async (event) => {
     }
 }
 
+const parkiranIdFromURL = new URLSearchParams(window.location.search).get('parkiranid');
+if (parkiranIdFromURL) {
+    document.getElementById('parkiranIdInput').value = parkiranIdFromURL;
+    searchEmployeeById(employeeIdFromURL);
+}
+
 document.getElementById('updateparkiran').addEventListener('submit', updateParkiran)
