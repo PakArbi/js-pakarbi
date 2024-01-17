@@ -185,7 +185,7 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
             <td>${item.namakendaraan}</td>
             <td>${item.nomorkendaraan}</td>
             <td>${item.jeniskendaraan}</td>
-            // <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
+            <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
             <td>
                 <a href="#" class="delete-link" data-parkiranid="${item.parkiranid}">Delete</a>
             </td>
