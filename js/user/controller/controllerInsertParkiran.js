@@ -45,7 +45,7 @@ const insertParkiran = async (event) => {
             namakendaraan: document.getElementById('newnamakendaraan').value,
             nomorkendaraan: document.getElementById('newnomorkendaraan').value,
             jeniskendaraan: document.getElementById('newjeniskendaraan').value,
-            status: document.getElementById('newStatus').value === 'active' ? true : false,
+            // status: document.getElementById('newStatus').value === 'active' ? true : false,
         }),
         redirect: 'follow',
     }

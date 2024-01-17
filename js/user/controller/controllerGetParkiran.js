@@ -61,7 +61,7 @@ const getParkiranById = async (ParkiranId) => {
         return
     }
 
-    const targetURL = `https://asia-southeast2-pakarbi.cloudfunctions.net/getFetchParkiran/${ParkiranId}`
+    const targetURL = `https://asia-southeast2-project3-403614.cloudfunctions.net/getOneDataParkiran`
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)
@@ -102,7 +102,7 @@ const deleteParkiran = async (ParkiranId) => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/deleteparkirannpm'
+    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/deleteParkiran'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)
@@ -185,7 +185,7 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
             <td>${item.namakendaraan}</td>
             <td>${item.nomorkendaraan}</td>
             <td>${item.jeniskendaraan}</td>
-            <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
+            // <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
             <td>
                 <a href="#" class="delete-link" data-parkiranid="${item.parkiranid}">Delete</a>
             </td>
