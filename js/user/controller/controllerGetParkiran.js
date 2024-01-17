@@ -23,7 +23,7 @@ const getAllParkiran = async () => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/getallparkiran'
+    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/getDataParkiran'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)

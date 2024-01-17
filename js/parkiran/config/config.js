@@ -4,7 +4,7 @@ import {
 
 //token api
 export function getTokenFromAPI() {
-    const tokenUrl = "https://asia-southeast2-pakarbi.cloudfunctions.net/insertparkirannpm";
+    const tokenUrl = "https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran";
     fetch(tokenUrl)
         .then(response => response.json())
         .then(tokenData => {

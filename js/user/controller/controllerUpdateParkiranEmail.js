@@ -28,7 +28,7 @@ const searchnomorById = async (ParkiranId) => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/updateParkiran'
+    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/updateDataParkiranEmail'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)
@@ -84,7 +84,7 @@ const updateParkiran = async (event) => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/updateParkiran'
+    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/updateDataParkiranEmail'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)

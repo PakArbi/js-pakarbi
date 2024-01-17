@@ -28,7 +28,7 @@ const searchnomorById = async (nomorId) => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/updateusernpm'
+    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/updateusernpm'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)
@@ -83,7 +83,7 @@ const updateUser = async (event) => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/updateusernpm'
+    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/updateusernpm'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)
