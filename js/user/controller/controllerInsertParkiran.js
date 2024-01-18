@@ -1,13 +1,13 @@
 const getTokenFromCookies = (cookieName) => {
-    const cookies = document.cookie.split(';');
+    const cookies = document.cookie.split(';')
     for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split('=');
+        const [name, value] = cookie.trim().split('=')
         if (name === cookieName) {
-            return value;
+            return value
         }
     }
-    return null;
-};
+    return null
+}
 
 const showAlert = (message, type = 'success') => {
     Swal.fire({
@@ -15,8 +15,8 @@ const showAlert = (message, type = 'success') => {
         text: message,
         showConfirmButton: false,
         timer: 1500,
-    });
-};
+    })
+}
 
 const insertParkiran = async (event) => {
     event.preventDefault();
@@ -28,27 +28,25 @@ const insertParkiran = async (event) => {
         return;
     }
 
-    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/insertparkirannpm';
+    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran';
 
     const myHeaders = new Headers();
     myHeaders.append('Login', token);
     myHeaders.append('Content-Type', 'application/json');
 
-    const parkiranData = {
-        parkiranid: document.getElementById('newparkiranid').value,
-        nama: document.getElementById('newnama').value,
-        npm: document.getElementById('newnmp').value,
-        prodi: document.getElementById('newprodi').value,
-        namakendaraan: document.getElementById('newnamakendaraan').value,
-        nomorkendaraan: document.getElementById('newnomorkendaraan').value,
-        jeniskendaraan: document.getElementById('newjeniskendaraan').value,
-        status: document.getElementById('newStatus').value === 'active' ? true : false,
-    };
-
     const requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: JSON.stringify(parkiranData),
+        body: JSON.stringify({
+            parkiranid: document.getElementById('newparkiranid').value,
+            nama: document.getElementById('newnama').value,
+            npm: document.getElementById('newnama').value,
+            prodi: document.getElementById('newprodi').value,
+            namakendaraan: document.getElementById('newnamakendaraan').value,
+            nomorkendaraan: document.getElementById('newnomorkendaraan').value,
+            jeniskendaraan: document.getElementById('newjeniskendaraan').value,
+            status: document.getElementById('newStatus').value === 'active' ? true : false,
+        }),
         redirect: 'follow',
     };
 
@@ -60,7 +58,8 @@ const insertParkiran = async (event) => {
             showAlert(data.message, 'error');
         } else {
             showAlert('Catalog data parkiran successfully!', 'success');
-            generateQRCode(parkiranData); // Call the function to generate QR code
+            // Fetch and display QR code after successful insertion
+            displayQRCode(data.parkiranid);
             window.location.href = 'inputprofilparkiran.html';
         }
     } catch (error) {
@@ -68,16 +67,38 @@ const insertParkiran = async (event) => {
     }
 };
 
-// Function to generate QR code based on data
-const generateQRCode = (parkiranData) => {
-    const qrCodeData = JSON.stringify(parkiranData);
-    // Use a QR code generation library, for example, qr-code-styling
-    // Replace the following line with the actual library and method
-    const qrCodeImage = generateQRCodeImage(qrCodeData);
+// Function to fetch and display QR code on the dashboard
+const displayQRCode = async (parkiranid) => {
+    const qrCodeImage = await fetchQRCodeFromServer(parkiranid);
 
-    // Display or save the generated QR code image as needed
-    // For example, update an image tag with the generated image data
-    document.getElementById('qrCodeImage').src = qrCodeImage;
+    if (qrCodeImage) {
+        // Assuming qrCodeContainer is an element to display the QR code
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+        qrCodeContainer.innerHTML = `<img src="${qrCodeImage}" alt="QR Code with Logo" />`;
+    } else {
+        console.error('Failed to fetch QR code from the server.');
+    }
+};
+
+// Function to fetch QR code with logo from the server
+const fetchQRCodeFromServer = async (parkiranid) => {
+    const logoPath = 'asset/img/logo_ulbi.png'; // Path to ULBI logo
+    const serverURL = `https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran?parkiranid=${parkiranid}&logoPath=${logoPath}`;
+
+    try {
+        const response = await fetch(serverURL);
+        const qrCodeData = await response.json();
+
+        if (qrCodeData.status === true) {
+            return qrCodeData.qrCodeBase64;
+        } else {
+            console.error('Server returned an error:', qrCodeData.message);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching QR code:', error);
+        return null;
+    }
 };
 
 document.getElementById('formparkiran').addEventListener('submit', insertParkiran);
