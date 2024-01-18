@@ -19,28 +19,28 @@ const showAlert = (message, type = 'success') => {
 }
 
 const insertParkiran = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const token = getTokenFromCookies('Login')
+    const token = getTokenFromCookies('Login');
 
     if (!token) {
-        showAlert('Header Login Not Found', 'error')
-        return
+        showAlert('Header Login Not Found', 'error');
+        return;
     }
 
-    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran'
+    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran';
 
-    const myHeaders = new Headers()
-    myHeaders.append('Login', token)
-    myHeaders.append('Content-Type', 'application/json')
+    const myHeaders = new Headers();
+    myHeaders.append('Login', token);
+    myHeaders.append('Content-Type', 'application/json');
 
     const requestOptions = {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify({
-            parkiranid: document.getElementById('newparkiranid').value,
+            // parkiranid: document.getElementById('newparkiranid').value,
             nama: document.getElementById('newnama').value,
-            npm: document.getElementById('newnama').value,
+            npm: document.getElementById('newnpm').value, // Corrected npm field
             prodi: document.getElementById('newprodi').value,
             namakendaraan: document.getElementById('newnamakendaraan').value,
             nomorkendaraan: document.getElementById('newnomorkendaraan').value,
@@ -48,46 +48,43 @@ const insertParkiran = async (event) => {
             status: document.getElementById('newStatus').value === 'active' ? true : false,
         }),
         redirect: 'follow',
-    }
+    };
 
-    // Fungsi untuk meng-generate QR code setelah input data berhasil
-    const generateQRCode = async () => {
-  
-        try {
-            const response = await fetch(targetURL, requestOptions);
-            const data = await response.json();
-    
-            if (data.status === false) {
-                showAlert(data.message, 'error');
-            } else {
-                showAlert('Data parkiran successfully!', 'success');
-                
-                // Decode base64Image from the response data
-                const base64Image = JSON.parse(data.data.base64Image).base64Image;
-    
-                // Setelah input data berhasil, panggil fungsi untuk menghasilkan QR code dan menampilkannya
-                generateAndShowQRCode(base64Image);
-                window.location.href = 'inputprofilparkiran.html';
-            }
-        } catch (error) {
-            console.error('Error:', error);
+    try {
+        const response = await fetch(targetURL, requestOptions);
+        const data = await response.json();
+
+        if (data.status === false) {
+            showAlert(data.message, 'error');
+        } else {
+            showAlert('Data parkiran successfully!', 'success');
+
+            // Decode base64Image from the response data
+            const base64Image = JSON.parse(data.data.base64Image).base64Image;
+
+            // Setelah input data berhasil, panggil fungsi untuk menghasilkan QR code dan menampilkannya
+            generateAndShowQRCode(base64Image);
+            window.location.href = 'inputprofilparkiran.html';
         }
+    } catch (error) {
+        console.error('Error:', error);
     }
-    
-    // Fungsi untuk menghasilkan dan menampilkan QR code dalam bentuk gambar base64
-    const generateAndShowQRCode = (base64Image) => {
-        const qrCodeImage = document.createElement('img');
-        qrCodeImage.src = `data:image/png;base64, ${base64Image}`;
-        qrCodeImage.alt = 'QR Code';
-    
-        // Menampilkan QR code di suatu elemen HTML (misalnya, dengan ID 'qrcode-container')
-        const qrcodeContainer = document.getElementById('qrcode-container');
-        qrcodeContainer.innerHTML = '';
-        qrcodeContainer.appendChild(qrCodeImage);
-    }
-}
+};
 
-    document.getElementById('formparkiran').addEventListener('submit', insertParkiran)
+// Fungsi untuk menghasilkan dan menampilkan QR code dalam bentuk gambar base64
+const generateAndShowQRCode = (base64Image) => {
+    const qrCodeImage = document.createElement('img');
+    qrCodeImage.src = `data:image/png;base64, ${base64Image}`;
+    qrCodeImage.alt = 'QR Code';
+
+    // Menampilkan QR code di suatu elemen HTML (misalnya, dengan ID 'qrcode-container')
+    const qrcodeContainer = document.getElementById('qrcode-container');
+    qrcodeContainer.innerHTML = '';
+    qrcodeContainer.appendChild(qrCodeImage);
+};
+
+document.getElementById('formparkiran').addEventListener('submit', insertParkiran);
+
 
   // try {
     //     const response = await fetch(targetURL, requestOptions)

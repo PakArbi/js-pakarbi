@@ -187,14 +187,17 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
             <td>${item.jeniskendaraan}</td>
             <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
             <td>
+                <img src="data:image/png;base64, ${item.base64image}" alt="QR Code" />
+            </td>
+            <td>
                 <a href="#" class="delete-link" data-parkiranid="${item.parkiranid}">Delete</a>
             </td>
-        `
+        `;
 
-            parkirdatabody.appendChild(newRow)
-        })
+            parkirdatabody.appendChild(newRow);
+        });
     } else {
-        parkirdatabody.innerHTML = `<tr><td colspan="6">No parkiran data found.</td></tr>`
+        parkirdatabody.innerHTML = `<tr><td colspan="6">No parkiran data found.</td></tr>`;
     }
 }
 
