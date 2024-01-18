@@ -38,6 +38,26 @@ export function GetDataForm() {
     return data
 }
 
+// Add this function to get user data by npm and display it on the dashboard
+export function GetUserDataByNPMAndName() {
+    const npm = document.getElementById("npm").value; // Assuming npm is available after login
+    const nama = document.getElementById("nama").value; // Assuming nama is available after login
+
+    // Fetch user data by npm and nama
+    const apiUrl = `https://asia-southeast2-project3-403614.cloudfunctions.net/getDataParkiran?npm=${npm}&nama=${nama}`;
+    
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(userData => {
+            // Display user data on the dashboard
+            const userInfoElement = document.getElementById("userInfo");
+            userInfoElement.innerHTML = `${userData.nama} - ${userData.npm}`;
+        })
+        .catch(error => console.error('Error fetching user data:', error));
+}
+
+
+
 // post login
 export function PostLogin() {
     const npm = document.getElementById("npm").value;
@@ -81,6 +101,9 @@ function ResponsePostLogin(response) {
     }
 }
 
+// Call the function after login success
+ResponsePostLogin(result);
+GetUserDataByNPMAndName();
 
 export function ResponsePost(result) {
     AlertPost(result);
