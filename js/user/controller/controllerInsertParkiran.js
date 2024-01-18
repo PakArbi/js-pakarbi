@@ -1,13 +1,13 @@
 const getTokenFromCookies = (cookieName) => {
-    const cookies = document.cookie.split(';')
+    const cookies = document.cookie.split(';');
     for (const cookie of cookies) {
-        const [name, value] = cookie.trim().split('=')
+        const [name, value] = cookie.trim().split('=');
         if (name === cookieName) {
-            return value
+            return value;
         }
     }
-    return null
-}
+    return null;
+};
 
 const showAlert = (message, type = 'success') => {
     Swal.fire({
@@ -15,8 +15,8 @@ const showAlert = (message, type = 'success') => {
         text: message,
         showConfirmButton: false,
         timer: 1500,
-    })
-}
+    });
+};
 
 const insertParkiran = async (event) => {
     event.preventDefault();
@@ -28,25 +28,27 @@ const insertParkiran = async (event) => {
         return;
     }
 
-    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran';
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/insertparkirannpm';
 
     const myHeaders = new Headers();
     myHeaders.append('Login', token);
     myHeaders.append('Content-Type', 'application/json');
 
+    const parkiranData = {
+        parkiranid: document.getElementById('newparkiranid').value,
+        nama: document.getElementById('newnama').value,
+        npm: document.getElementById('newnmp').value,
+        prodi: document.getElementById('newprodi').value,
+        namakendaraan: document.getElementById('newnamakendaraan').value,
+        nomorkendaraan: document.getElementById('newnomorkendaraan').value,
+        jeniskendaraan: document.getElementById('newjeniskendaraan').value,
+        status: document.getElementById('newStatus').value === 'active' ? true : false,
+    };
+
     const requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: JSON.stringify({
-            // parkiranid: document.getElementById('newparkiranid').value,
-            nama: document.getElementById('newnama').value,
-            npm: document.getElementById('newnpm').value, // Corrected npm field
-            prodi: document.getElementById('newprodi').value,
-            namakendaraan: document.getElementById('newnamakendaraan').value,
-            nomorkendaraan: document.getElementById('newnomorkendaraan').value,
-            jeniskendaraan: document.getElementById('newjeniskendaraan').value,
-            status: document.getElementById('newStatus').value === 'active' ? true : false,
-        }),
+        body: JSON.stringify(parkiranData),
         redirect: 'follow',
     };
 
@@ -57,13 +59,8 @@ const insertParkiran = async (event) => {
         if (data.status === false) {
             showAlert(data.message, 'error');
         } else {
-            showAlert('Data parkiran successfully!', 'success');
-
-            // Decode base64Image from the response data
-            const base64Image = JSON.parse(data.data.base64Image).base64Image;
-
-            // Setelah input data berhasil, panggil fungsi untuk menghasilkan QR code dan menampilkannya
-            generateAndShowQRCode(base64Image);
+            showAlert('Catalog data parkiran successfully!', 'success');
+            generateQRCode(parkiranData); // Call the function to generate QR code
             window.location.href = 'inputprofilparkiran.html';
         }
     } catch (error) {
@@ -71,31 +68,16 @@ const insertParkiran = async (event) => {
     }
 };
 
-// Fungsi untuk menghasilkan dan menampilkan QR code dalam bentuk gambar base64
-const generateAndShowQRCode = (base64Image) => {
-    const qrCodeImage = document.createElement('img');
-    qrCodeImage.src = `data:image/png;base64, ${base64Image}`;
-    qrCodeImage.alt = 'QR Code';
+// Function to generate QR code based on data
+const generateQRCode = (parkiranData) => {
+    const qrCodeData = JSON.stringify(parkiranData);
+    // Use a QR code generation library, for example, qr-code-styling
+    // Replace the following line with the actual library and method
+    const qrCodeImage = generateQRCodeImage(qrCodeData);
 
-    // Menampilkan QR code di suatu elemen HTML (misalnya, dengan ID 'qrcode-container')
-    const qrcodeContainer = document.getElementById('qrcode-container');
-    qrcodeContainer.innerHTML = '';
-    qrcodeContainer.appendChild(qrCodeImage);
+    // Display or save the generated QR code image as needed
+    // For example, update an image tag with the generated image data
+    document.getElementById('qrCodeImage').src = qrCodeImage;
 };
 
 document.getElementById('formparkiran').addEventListener('submit', insertParkiran);
-
-
-  // try {
-    //     const response = await fetch(targetURL, requestOptions)
-    //     const data = await response.json()
-
-    //     if (data.status === false) {
-    //         showAlert(data.message, 'error')
-    //     } else {
-    //         showAlert('Catalog data parkiran successfully!', 'success')
-    //         window.location.href = 'inputprofilparkiran.html'
-    //     }
-    // } catch (error) {
-    //     console.error('Error:', error)
-    // }

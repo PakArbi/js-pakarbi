@@ -2,9 +2,13 @@ import {
     setCookieWithExpireHour
 } from 'https://jscroot.github.io/cookie/croot.js';
 
+let userToken;
+let npm;
+let nama;
+
 //token api
 export function getTokenFromAPI() {
-    const tokenUrl = "https://asia-southeast2-project3-403614.cloudfunctions.net/loginusernpm";
+    const tokenUrl = "https://asia-southeast2-pakarbi.cloudfunctions.net/loginpakarbinpm";
     fetch(tokenUrl)
         .then(response => response.json())
         .then(tokenData => {
@@ -14,6 +18,25 @@ export function getTokenFromAPI() {
             }
         })
         .catch(error => console.error('Gagal mengambil token:', error));
+}
+
+// Add this function to get user data by npm and nama
+export function GetUserDataByNPMAndName() {
+    // Fetch user data by npm and nama
+    const apiUrl = `https://asia-southeast2-project3-403614.cloudfunctions.net/getDataParkiran?npm=${npm}&nama=${nama}`;
+    
+    fetch(apiUrl, {
+        headers: {
+            'Authorization': `Bearer ${userToken}`,
+        },
+    })
+        .then(response => response.json())
+        .then(userData => {
+            // Display user data on the dashboard
+            const userInfoElement = document.getElementById("userInfo");
+            userInfoElement.innerHTML = `${userData.nama} - ${userData.npm}`;
+        })
+        .catch(error => console.error('Error fetching user data:', error));
 }
 
 //get data 
@@ -37,26 +60,6 @@ export function GetDataForm() {
     };
     return data
 }
-
-// Add this function to get user data by npm and display it on the dashboard
-export function GetUserDataByNPMAndName() {
-    const npm = document.getElementById("npm").value; // Assuming npm is available after login
-    const nama = document.getElementById("nama").value; // Assuming nama is available after login
-
-    // Fetch user data by npm and nama
-    const apiUrl = `https://asia-southeast2-project3-403614.cloudfunctions.net/getDataParkiran?npm=${npm}&nama=${nama}`;
-    
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(userData => {
-            // Display user data on the dashboard
-            const userInfoElement = document.getElementById("userInfo");
-            userInfoElement.innerHTML = `${userData.nama} - ${userData.npm}`;
-        })
-        .catch(error => console.error('Error fetching user data:', error));
-}
-
-
 
 // post login
 export function PostLogin() {
@@ -82,6 +85,17 @@ export function AlertPost(value) {
     window.location.href = "login.html"
 }
 
+function validateLogin(callback) {
+    // Implement your login validation logic here
+    // Make asynchronous API calls if needed
+
+    // Example: Simulating asynchronous behavior
+    setTimeout(() => {
+        const isValid = true; // Replace with your actual validation logic
+        callback(isValid);
+    }, 1000); // Simulating a delay of 1 second
+}
+
 // response post login
 function ResponsePostLogin(response) {
     if (response && response.token) {
@@ -101,9 +115,30 @@ function ResponsePostLogin(response) {
     }
 }
 
-// Call the function after login success
-ResponsePostLogin(result);
-GetUserDataByNPMAndName();
+// handle login
+export function HandleLogin() {
+    // Assuming you have a function to validate the login credentials.
+    const isValidLogin = validateLogin(ResponsePostLogin);
+
+    if (isValidLogin) {
+        // Set npm and nama based on your login logic.
+        npm = document.getElementById("npm").value;
+        nama = document.getElementById("nama").value;
+
+        // Call the function to get user data after a successful login.
+        GetUserDataByNPMAndName();
+
+        // You can also redirect the user to the dashboard here.
+        window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
+    } else {
+        // Handle invalid login
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal Masuk',
+            text: 'NPM atau Kata Sandi tidak valid. Silakan coba lagi.',
+        });
+    }
+}
 
 export function ResponsePost(result) {
     AlertPost(result);

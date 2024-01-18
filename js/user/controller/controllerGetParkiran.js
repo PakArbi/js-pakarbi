@@ -161,9 +161,8 @@ const deleteParkiranHandler = (ParkiranId) => {
 // Event listener to handle clicks on the table
 document.getElementById('parkiranDataBody').addEventListener('click', (event) => {
     const target = event.target;
-    const ParkiranId = target.getAttribute('data-parkiranid');
-
     if (target.classList.contains('delete-link')) {
+        const ParkiranId = target.getAttribute('data-parkiranid');
         deleteParkiranHandler(ParkiranId);
     }
 });
@@ -178,19 +177,19 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
         parkiranData.forEach((item) => {
             const newRow = document.createElement('tr')
             newRow.innerHTML = `
-            <td>${item.parkiranid}</td>
-            <td>${item.nama}</td>
-            <td>${item.npm}</td>
-            <td>${item.prodi}</td>
-            <td>${item.namakendaraan}</td>
-            <td>${item.nomorkendaraan}</td>
-            <td>${item.jeniskendaraan}</td>
-            <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
+            <td>${parkiran.parkiranid}</td>
+            <td>${parkiran.nama}</td>
+            <td>${parkiran.npm}</td>
+            <td>${parkiran.prodi}</td>
+            <td>${parkiran.namakendaraan}</td>
+            <td>${parkiran.nomorkendaraan}</td>
+            <td>${parkiran.jeniskendaraan}</td>
+            <td>${parkiran.status ? 'Sudah Parkir' : 'Sudah Keluar'}</td>
             <td>
-                <img src="data:image/png;base64, ${item.base64image}" alt="QR Code" />
+                <img src="data:image/png;base64, ${parkiran.base64image}" alt="QR Code" />
             </td>
             <td>
-                <a href="#" class="delete-link" data-parkiranid="${item.parkiranid}">Delete</a>
+            <a href="#" class="delete-link" data-nomorid="${parkiran.parkiranid}">Delete</a>
             </td>
         `;
 
