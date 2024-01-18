@@ -40,7 +40,7 @@ const insertParkiran = async (event) => {
         body: JSON.stringify({
             parkiranid: document.getElementById('newparkiranid').value,
             nama: document.getElementById('newnama').value,
-            npm: document.getElementById('newnama').value,
+            npm: document.getElementById('newnpm').value,
             prodi: document.getElementById('newprodi').value,
             namakendaraan: document.getElementById('newnamakendaraan').value,
             nomorkendaraan: document.getElementById('newnomorkendaraan').value,
@@ -67,14 +67,15 @@ const insertParkiran = async (event) => {
     }
 };
 
+
 // Function to fetch and display QR code on the dashboard
 const displayQRCode = async (parkiranid) => {
     const qrCodeImage = await fetchQRCodeFromServer(parkiranid);
 
     if (qrCodeImage) {
         // Assuming qrCodeContainer is an element to display the QR code
-        const qrCodeContainer = document.getElementById('qrCodeContainer');
-        qrCodeContainer.innerHTML = `<img src="${qrCodeImage}" alt="QR Code with Logo" />`;
+        const qrCodeContainer = document.getElementById('qrCodeImage');
+        qrCodeContainer.innerHTML = `<img src="${qrCodeImage}" alt="QR Code" />`;
     } else {
         console.error('Failed to fetch QR code from the server.');
     }
@@ -82,7 +83,7 @@ const displayQRCode = async (parkiranid) => {
 
 // Function to fetch QR code with logo from the server
 const fetchQRCodeFromServer = async (parkiranid) => {
-    const logoPath = 'asset/img/logo_ulbi.png'; // Path to ULBI logo
+    const logoPath = 'qrcode/logo_ulbi.png'; // Path to ULBI logo
     const serverURL = `https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran?parkiranid=${parkiranid}&logoPath=${logoPath}`;
 
     try {
@@ -100,5 +101,10 @@ const fetchQRCodeFromServer = async (parkiranid) => {
         return null;
     }
 };
-
 document.getElementById('formparkiran').addEventListener('submit', insertParkiran);
+
+document.getElementById('generateQRButton').addEventListener('click', () => {
+    const parkiranid = document.getElementById('newparkiranid').value;
+    displayQRCode(parkiranid);
+});
+
