@@ -52,49 +52,49 @@ const getAllParkiran = async () => {
     }
 }
 
-const getParkiranById = async (ParkiranId) => {
-    const token = getTokenFromCookies('Login')
+// const getParkiranById = async (ParkiranId) => {
+//     const token = getTokenFromCookies('Login')
 
-    if (!token) {
-        showAlert('Header Login Not Found', 'error')
-        return
-    }
+//     if (!token) {
+//         showAlert('Header Login Not Found', 'error')
+//         return
+//     }
 
-    const targetURL = `https://asia-southeast2-project3-403614.cloudfunctions.net/getDataParkiran/${ParkiranId}`
+//     const targetURL = `https://asia-southeast2-project3-403614.cloudfunctions.net/getDataParkiran/${ParkiranId}`
 
-    const myHeaders = new Headers()
-    myHeaders.append('Login', token)
-    myHeaders.append('Content-Type', 'application/json')
+//     const myHeaders = new Headers()
+//     myHeaders.append('Login', token)
+//     myHeaders.append('Content-Type', 'application/json')
 
-    const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-    }
+//     const requestOptions = {
+//         method: 'GET',
+//         headers: myHeaders,
+//         redirect: 'follow',
+//     }
 
-    try {
-        const response = await fetch(targetURL, requestOptions);
-        const data = await response.json();
+//     try {
+//         const response = await fetch(targetURL, requestOptions);
+//         const data = await response.json();
 
-        if (data.status === 200) {
-            // Do something with the retrieved parkiran data
-            console.log('Parkiran Details:', data.parkiran);
+//         if (data.status === 200) {
+//             // Do something with the retrieved parkiran data
+//             console.log('Parkiran Details:', data.parkiran);
 
-            // Return parkiran data including QR code
-            return data.parkiran;
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: data.message,
-            });
-            return null;
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        return null;
-    }
-};
+//             // Return parkiran data including QR code
+//             return data.parkiran;
+//         } else {
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Error',
+//                 text: data.message,
+//             });
+//             return null;
+//         }
+//     } catch (error) {
+//         console.error('Error:', error);
+//         return null;
+//     }
+// };
 
 //Get Data by Id
 // const getParkiranById = async (ParkiranId) => {
@@ -218,7 +218,7 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
             <td>${item.jeniskendaraan}</td>
             <td>${item.jammasuk}</td>
             <td>${item.jamkeluar}</td>
-            <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
+            <td>${item.status ? 'Mahasiswa Aktif' : 'Mahasiswa Tidak Aktif'}</td>
             // <td>
             // <a href="#" class="detail-link" data-parkiranid="${item.parkiranid}">Detail</a>
             // </td>
