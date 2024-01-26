@@ -28,7 +28,7 @@ const insertParkiran = async (event) => {
         return;
     }
 
-    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran';
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/insertparkirannpm';
 
     const myHeaders = new Headers();
     myHeaders.append('Login', token);
@@ -45,6 +45,8 @@ const insertParkiran = async (event) => {
             namakendaraan: document.getElementById('newnamakendaraan').value,
             nomorkendaraan: document.getElementById('newnomorkendaraan').value,
             jeniskendaraan: document.getElementById('newjeniskendaraan').value,
+            jammasuk: document.getElementById('newjammasuk').value,
+            jamkeluar: document.getElementById('newjamkeluar').value,
             status: document.getElementById('newStatus').value === 'active' ? true : false,
         }),
         redirect: 'follow',
@@ -68,43 +70,43 @@ const insertParkiran = async (event) => {
 };
 
 
-// Function to fetch and display QR code on the dashboard
-const displayQRCode = async (parkiranid) => {
-    const qrCodeImage = await fetchQRCodeFromServer(parkiranid);
+// // Function to fetch and display QR code on the dashboard
+// const displayQRCode = async (parkiranid) => {
+//     const qrCodeImage = await fetchQRCodeFromServer(parkiranid);
 
-    if (qrCodeImage) {
-        // Assuming qrCodeContainer is an element to display the QR code
-        const qrCodeContainer = document.getElementById('qrCodeImage');
-        qrCodeContainer.innerHTML = `<img src="${qrCodeImage}" alt="QR Code" />`;
-    } else {
-        console.error('Failed to fetch QR code from the server.');
-    }
-};
+//     if (qrCodeImage) {
+//         // Assuming qrCodeContainer is an element to display the QR code
+//         const qrCodeContainer = document.getElementById('qrCodeImage');
+//         qrCodeContainer.innerHTML = `<img src="${qrCodeImage}" alt="QR Code" />`;
+//     } else {
+//         console.error('Failed to fetch QR code from the server.');
+//     }
+// };
 
-// Function to fetch QR code with logo from the server
-const fetchQRCodeFromServer = async (parkiranid) => {
-    const logoPath = 'qrcode/logo_ulbi.png'; // Path to ULBI logo
-    const serverURL = `https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran?parkiranid=${parkiranid}&logoPath=${logoPath}`;
+// // Function to fetch QR code with logo from the server
+// const fetchQRCodeFromServer = async (parkiranid) => {
+//     const logoPath = 'qrcode/logo_ulbi.png'; // Path to ULBI logo
+//     const serverURL = `https://asia-southeast2-project3-403614.cloudfunctions.net/insertDataParkiran?parkiranid=${parkiranid}&logoPath=${logoPath}`;
 
-    try {
-        const response = await fetch(serverURL);
-        const qrCodeData = await response.json();
+//     try {
+//         const response = await fetch(serverURL);
+//         const qrCodeData = await response.json();
 
-        if (qrCodeData.status === true) {
-            return qrCodeData.qrCodeBase64;
-        } else {
-            console.error('Server returned an error:', qrCodeData.message);
-            return null;
-        }
-    } catch (error) {
-        console.error('Error fetching QR code:', error);
-        return null;
-    }
-};
+//         if (qrCodeData.status === true) {
+//             return qrCodeData.qrCodeBase64;
+//         } else {
+//             console.error('Server returned an error:', qrCodeData.message);
+//             return null;
+//         }
+//     } catch (error) {
+//         console.error('Error fetching QR code:', error);
+//         return null;
+//     }
+// };
+
 document.getElementById('formparkiran').addEventListener('submit', insertParkiran);
 
 document.getElementById('generateQRButton').addEventListener('click', () => {
     const parkiranid = document.getElementById('newparkiranid').value;
     displayQRCode(parkiranid);
 });
-

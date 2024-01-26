@@ -28,7 +28,7 @@ const searchnomorById = async (ParkiranId) => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/updateDataParkiranEmail'
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/updateparkiranemail'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)
@@ -69,6 +69,8 @@ const populateUpdateForm = (parkiranData) => {
     setValue('namakendaraaninput', parkiranData.namakendaraan)
     setValue('nomorkendaraaninput', parkiranData.nomorkendaraan)
     setValue('jeniskendaraaninput', parkiranData.jeniskendaraan)
+    setValue('jammasukinput', parkiranData.jammasuk)
+    setValue('jamkeluarinput', parkiranData.jamkeluar)
     setValue('Statusinput', parkiranData.status)
 
     document.getElementById('updateparkiran').style.display = 'block'
@@ -84,7 +86,7 @@ const updateParkiran = async (event) => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/updateDataParkiranEmail'
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/updateparkiranemail'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)
@@ -103,6 +105,8 @@ const updateParkiran = async (event) => {
             namakendaraan: document.getElementById('namakendaraaninput').value,
             nomorkendaraan: document.getElementById('nomorkendaraaninput').value,
             jeniskendaraan: document.getElementById('jeniskendaraaninput').value,
+            jammasuk: document.getElementById('jammasukinput').value,
+            jamkeluar: document.getElementById('jamkeluarinput').value,
             status: statusValue,
         }),
         redirect: 'follow',

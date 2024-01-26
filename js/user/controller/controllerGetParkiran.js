@@ -23,7 +23,7 @@ const getAllParkiran = async () => {
         return
     }
 
-    const targetURL = 'https://asia-southeast2-project3-403614.cloudfunctions.net/getDataParkiran'
+    const targetURL = 'https://asia-southeast2-pakarbi.cloudfunctions.net/getallparkiran'
 
     const myHeaders = new Headers()
     myHeaders.append('Login', token)
@@ -216,10 +216,12 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
             <td>${item.namakendaraan}</td>
             <td>${item.nomorkendaraan}</td>
             <td>${item.jeniskendaraan}</td>
+            <td>${item.jammasuk}</td>
+            <td>${item.jamkeluar}</td>
             <td>${item.status ? 'Sedang Parkir' : 'Sedang Keluar'}</td>
-            <td>
-            <a href="#" class="detail-link" data-parkiranid="${item.parkiranid}">Detail</a>
-            </td>
+            // <td>
+            // <a href="#" class="detail-link" data-parkiranid="${item.parkiranid}">Detail</a>
+            // </td>
         `
 
             parkirdatabody.appendChild(newRow)
