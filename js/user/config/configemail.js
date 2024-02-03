@@ -1,55 +1,45 @@
 import {
     setCookieWithExpireHour
-} from 'https://jscroot.github.io/cookie/croot.js';
+} from "https://jscroot.github.io/cookie/croot.js";
 
-//token api
+
+// Token
 export function getTokenFromAPI() {
-    const tokenUrl = "https://asia-southeast2-pakarbi.cloudfunctions.net/loginpakarbiemail";
+    const tokenUrl =
+        "https://asia-southeast2-pakarbi.cloudfunctions.net/loginpakarbiemail";
     fetch(tokenUrl)
-        .then(response => response.json())
-        .then(tokenData => {
+        .then((response) => response.json())
+        .then((tokenData) => {
             if (tokenData.token) {
                 userToken = tokenData.token;
-                console.log('Token dari API:', userToken);
+                console.log("Token dari API:", userToken);
             }
         })
-        .catch(error => console.error('Gagal mengambil token:', error));
+        .catch((error) => console.error("Gagal mengambil token:", error));
 }
 
-//get data 
 export function GetDataForm() {
-    const email = document.querySelector("#email").value;
+    const usernameid = document.querySelector("#usernameid").value;
+    const username = document.querySelector("#username").value;
+    const npm = document.querySelector("#npm").value;
+    const password = document.querySelector("#password").value;
     const passwordhash = document.querySelector("#passwordhash").value;
+    const email = document.querySelector("#email").value;
     const role = document.querySelector("#role").value;
-    console.log(passwordhash)
 
     const data = {
-        email: email,
+        usernameid: usernameid,
+        username: username,
+        npm: npm,
+        password: password,
         passwordhash: passwordhash,
+        email: email,
         role: role
     };
     return data
 }
 
-// Add this function to get user data by npm and display it on the dashboard
-export function GetUserDataByNPMAndName() {
-    const npm = document.getElementById("npm").value; // Assuming npm is available after login
-    const nama = document.getElementById("nama").value; // Assuming nama is available after login
-
-    // Fetch user data by npm and nama
-    const apiUrl = `https://asia-southeast2-project3-403614.cloudfunctions.net/getDataParkiran?npm=${npm}&nama=${nama}`;
-    
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(userData => {
-            // Display user data on the dashboard
-            const userInfoElement = document.getElementById("userInfo");
-            userInfoElement.innerHTML = `${userData.nama} - ${userData.npm}`;
-        })
-        .catch(error => console.error('Error fetching user data:', error));
-}
-
-// post login
+// Login
 export function PostLogin() {
     const email = document.getElementById("email").value;
     const passwordhash = document.getElementById("passwordhash").value;
@@ -73,10 +63,11 @@ export function AlertPost(value) {
     window.location.href = "login.html"
 }
 
-// response post login
+// Response Post Login
 function ResponsePostLogin(response) {
     if (response && response.token) {
-        setCookieWithExpireHour('Login', response.token, 2);
+        // console.log("Token User:", response.token);
+        setCookieWithExpireHour("Login", response.token, 2);
         window.location.href = 'https://pakarbi.vaidiq.cloud/pages/dashboard.html';
         Swal.fire({
             icon: 'success',
@@ -92,13 +83,10 @@ function ResponsePostLogin(response) {
     }
 }
 
-// Call the function after login success
-ResponsePostLogin(result);
-GetUserDataByNPMAndName();
-
 export function ResponsePost(result) {
     AlertPost(result);
 }
+
 export function ResponseLogin(result) {
-    ResponsePostLogin(result)
+    ResponsePostLogin(result);
 }
