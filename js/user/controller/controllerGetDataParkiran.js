@@ -52,7 +52,7 @@ const getAllParkiran = async () => {
     }
 }
 
-const deleteParkiran = async (nik) => {
+const deleteParkiran = async (parkiranid) => {
     const token = getTokenFromCookies('Login')
 
     if (!token) {
@@ -70,7 +70,7 @@ const deleteParkiran = async (nik) => {
         method: 'DELETE',
         headers: myHeaders,
         body: JSON.stringify({
-            nik: nik
+            parkiranid: parkiranid
         }),
         redirect: 'follow',
     }
@@ -100,7 +100,7 @@ const deleteParkiran = async (nik) => {
 }
 
 // Function to handle the delete confirmation
-const deleteParkiranHandler = (ParkiranId) => {
+const deleteParkiranHandler = (parkiranid) => {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -111,7 +111,7 @@ const deleteParkiranHandler = (ParkiranId) => {
         confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
         if (result.isConfirmed) {
-            deleteParkiran(ParkiranId)
+            deleteParkiran(parkiranid)
         }
     })
 }
@@ -126,8 +126,8 @@ document.getElementById('parkiranDataBody').addEventListener('click', (event) =>
         const _id = parseInt(target.getAttribute('data-_id'))
         editParkiran(_id)
     } else if (target.classList.contains('delete-link')) {
-        const nik = parseInt(target.getAttribute('data-nik'))
-        deleteParkiranHandler(nik)
+        const parkiranid = parseInt(target.getAttribute('data-parkiranid'))
+        deleteParkiranHandler(parkiranid)
     }
 })
 
@@ -153,7 +153,7 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
                 <td>${item.status ? 'Mahasiswa Aktif' : 'Mahasiswa Tidak Aktif'}</td>
                 <td">
                     <a href="editprofilparkiran.html?_id=${item._id}" >Edit</a>
-                    <a href="#" class="delete-link" data-nik="${item.nik}">Delete</a>
+                    <a href="#" class="delete-link" data-parkiranid="${item.parkiranid}">Delete</a>
                 </td>
             `
             parkirdatabody.appendChild(newRow)
