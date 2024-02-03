@@ -100,7 +100,7 @@ const deleteParkiran = async (nik) => {
 }
 
 // Function to handle the delete confirmation
-const deleteParkiranHandler = (nik) => {
+const deleteParkiranHandler = (ParkiranId) => {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -111,7 +111,7 @@ const deleteParkiranHandler = (nik) => {
         confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
         if (result.isConfirmed) {
-            deleteParkiran(nik)
+            deleteParkiran(ParkiranId)
         }
     })
 }
@@ -139,11 +139,8 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
     if (parkiranData && parkiranData.length > 0) {
         parkiranData.forEach((item) => {
             // Check if all 'tanggapan' fields in the object are null
-            const tanggapanIsNull = Object.values(item.tanggapan).every(val => val === null);
-
-            if (tanggapanIsNull) {
-                const newRow = document.createElement('tr')
-                newRow.innerHTML = `
+            const newRow = document.createElement('tr')
+            newRow.innerHTML = `
                 <td>${item.parkiranid}</td>
                 <td>${item.nama}</td>
                 <td>${item.npm}</td>
@@ -159,8 +156,7 @@ const displayParkiranData = (parkiranData, tableBodyId) => {
                     <a href="#" class="delete-link" data-nik="${item.nik}">Delete</a>
                 </td>
             `
-                parkirdatabody.appendChild(newRow)
-            }
+            parkirdatabody.appendChild(newRow)
         })
     } else {
         parkirdatabody.innerHTML = `<tr><td colspan="6">No report data found.</td></tr>`
